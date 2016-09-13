@@ -7,11 +7,17 @@
 //
 
 #import "JPViewController.h"
+#import "JPEngine.h"
 
 @implementation JPViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [JPEngine startEngine];
+    NSString *sourcePath = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"js"];
+    NSString *script = [NSString stringWithContentsOfFile:sourcePath encoding:NSUTF8StringEncoding error:nil];
+    [JPEngine evaluateScript:script];
+    
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 100, [UIScreen mainScreen].bounds.size.width, 50)];
     [btn setTitle:@"Push JPTableViewController" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(handleBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -19,8 +25,7 @@
     [self.view addSubview:btn];
 }
 
-- (void)handleBtn:(id)sender
-{
+- (void)handleBtn:(id)sender{
 }
 
 @end
